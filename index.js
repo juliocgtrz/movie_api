@@ -51,7 +51,7 @@ let topTenMovies = [
 ];
 
 app.use(morgan('combined', {stream: accessLogStream}));
-app.use('/documentation.html', express.static('public'));
+app.use('./public/documentation.html', express.static('public'));
 
 app.get('/movies', (req, res) => {
     res.json(topTenMovies);
