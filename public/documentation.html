@@ -13,5 +13,185 @@
             movies, directors, and genres. Users will be able to sign up, update their
             personal information, and create a list of their favorite movies.
         </p>
+        <h2>Movie API Documentation</h2>
+        <!--table-->
+        <div>
+            <table class="table table-striped table-bordered table-responsive{-sm|-md|-lg|-xl}" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="col-2">Request</th>
+                        <th class="col-1">URL</th>
+                        <th class="col-1">HTTP Method</th>
+                        <th class="col-3">Request body data format</th>
+                        <th class="col-5">Response body data format</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Get a list of ALL movies</td>
+                        <td>/movies</td>
+                        <td>GET</td>
+                        <td>none</td>
+                        <td>A JSON object holding an array with all movies.</td>
+                    </tr>
+                    <tr>
+                        <td>Get data about a single movie by title</td>
+                        <td>/movies/:Title</td>
+                        <td>GET</td>
+                        <td>none</td>
+                        <td>A JSON object holding data about a single movie, containing description, genre, director, image URL, and whether it's featured or not property. Example:
+                            <code>
+                                {
+                                    "Title": "The Sandlot",
+                                    "Descirption": "In the summer of 1962, a new kid in town is taken under the wing of a young baseball prodigy and his rowdy team, resulting in many adventures.",
+                                    "Genre": {
+                                        "Name": "Comedy",
+                                        "Description": "A drama of light and amusing character and typically with a happy ending"
+                                    },
+                                    "Director": {
+                                        "Name": "David Mickey Evans",
+                                        "Bio": "David Mickey Evans was born on...",
+                                        "Birth": "1962"
+                                    },
+                                    "ImageURL": "https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6C12E7878CF4642CE13C3DF5E64D6584802F1363ABE86BCBEFCA297B239B2E24/scale?width=1200&aspectRatio=1.78&format=jpeg",
+                                    "Featured": false
+                                }
+                            </code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Get data about a genre by genre's name</td>
+                        <td>/movies/genre/:genreName</td>
+                        <td>GET</td>
+                        <td>none</td>
+                        <td>A JSON object holding data about a genre containing name and description properties. Example:
+                            <code>
+                                "Genre": {
+                                    "Name": "Comedy",
+                                    "Description": "A drama of light and amusing character and typically with a happy ending"
+                                }
+                            </code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Get data about a director by director's name</td>
+                        <td>/movies/directors/:directorName</td>
+                        <td>GET</td>
+                        <td>none</td>
+                        <td>A JSON object holding data aobut a director. Example:
+                            <code>
+                                {
+                                    "Name": "David Mickey Evans",
+                                    "Bio": "David Mickey Evans was born on October 20, 1962 in Wilkes Barre, Pennsylvania, USA. He is a director and writer, known for The Sandlot (1993), Untitled 'Sandlot' Prequel and Radio Flyer (1992).",
+                                    "Birth": "1962"
+                                }
+                            </code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Add a new user</td>
+                        <td>/users</td>
+                        <td>POST</td>
+                        <td>A JSON object holding user data, sturctured like this:
+                            <code>
+                                {
+                                    "Username": "Jerry",
+                                    "Password": "IloveMovies456",
+                                    "Email": "jerry.thom@email.fake",
+                                    "Birthday": "03-09-1988"
+                                }
+                            </code>
+                        </td>
+                        <td>A JSON object holding user data plus an ID and an array for placing favorite movies:
+                            <code>
+                                {
+                                    "Username": "Jerry",
+                                    "Password": "IloveMovies456",
+                                    "Email": "jerry.thom@email.fake",
+                                    "Birthday": "03-09-1988",
+                                    "FavoriteMovies": [],
+                                    "_id": "1234abcd",
+                                    "__v": 0
+                                }
+                            </code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Update user info</td>
+                        <td>/users/:Username</td>
+                        <td>PUT</td>
+                        <td>A JSON object holding the user info that should be changed. It should contain at least one of the following key/value pairs:
+                            <code>
+                                {
+                                    "Username": String,
+                                    "Password": String,
+                                    "Email": String,
+                                    "Birthday": Data
+                                }
+                            </code>
+                        </td>
+                        <td>
+                            A JSON object holding all user info with all key/value pairs updated:
+                            <code>
+                                {
+                                    "Username": "Jerry-Thom",
+                                    "Password": "IloveMovies456",
+                                    "Email": "jerry.thom@email.fake",
+                                    "Birthday": "03-09-1988",
+                                    "FavoriteMovies": [],
+                                    "_id": "1234abcd",
+                                    "__v": 0 
+                                }
+                            </code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Add a movie to user favorite list</td>
+                        <td>/users/:Username/movies/:movieID</td>
+                        <td>POST</td>
+                        <td>none</td>
+                        <td>A JSON object holding all user info with all key/value pairs updated:
+                            <code>
+                                {
+                                    "Username": "Jerry-Thom",
+                                    "Password": "IloveMovies456",
+                                    "Email": "jerry.thom@email.fake",
+                                    "Birthday": "03-09-1988",
+                                    "FavoriteMovies": ["765abc88def"],
+                                    "_id": "1234abcd",
+                                    "__v": 0
+                                }
+                            </code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Remove a movie from user favorite list</td>
+                        <td>/users/:Username/movies/:movieID</td>
+                        <td>DELETE</td>
+                        <td>none</td>
+                        <td>A JSON object holding all user info with all key/value pairs udpated:
+                            <code>
+                                {
+                                    "Username": "Jerry-Thom",
+                                    "Password": "IloveMovies456",
+                                    "Email": "jerry.thom@email.fake",
+                                    "Birthday": "03-09-1988",
+                                    "FavoriteMovies": [],
+                                    "_id": "1234abcd",
+                                    "__v": 0
+                                }
+                            </code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Delete user registration</td>
+                        <td>/users/:Username</td>
+                        <td>DELETE</td>
+                        <td>none</td>
+                        <td>A text message indicating whether a user was successfully removed.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
