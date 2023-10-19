@@ -16,3 +16,4 @@ Timestamp: Thu Sep 07 2023 23:00:12 GMT-0600 (Mountain Daylight Time)
 URL: /favicon.ico
 Timestamp: Thu Sep 07 2023 23:00:12 GMT-0600 (Mountain Daylight Time)
 
+::1 - - [19/Oct/2023:05:20:27 +0000] "GET /movies HTTP/1.1" 200 555 "-" "PostmanRuntime/7.33.0"
