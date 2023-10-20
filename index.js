@@ -21,7 +21,18 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-
+let users = [
+    {
+        id: 1,
+        name: "Jerry",
+        favoriteMovies: []
+    },
+    {
+        id: 2,
+        name: "Ashley",
+        favoriteMovies: ["The Sandlot"]
+    },
+]
 
 let movies = [
     {
