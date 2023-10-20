@@ -107,7 +107,7 @@ app.listen(8080, () => {
 //Get a list of all movies
 app.get('/movies', (req, res) => {
     res.status(200).json(movies);
-});
+})
 
 //Get data about a single movie by title
 app.get('/movies/:title', (req, res) => {
@@ -119,7 +119,7 @@ app.get('/movies/:title', (req, res) => {
     }else{
         res.status(400).send('no such movie')
     }
-});
+})
 
 //Get data about a genre by genre's name
 app.get('/movies/genre/:genreName', (req, res) => {
