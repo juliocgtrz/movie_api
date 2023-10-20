@@ -55,6 +55,36 @@ let movies = [
         imageURL: 'https://m.media-amazon.com/images/M/MV5BMzMxMDEzMWUtZDk3NS00MWRiLWJjOGMtN2Q0ZjVhZjU3ODhkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg',
         featured: false
     },
+    {
+        title: 'Angels in the Outfield',
+        description: 'When a boy prays for a chance to have a family if the California Angels win the pennant, angels are assigned to make that possible.',
+        genre: {
+            name: 'Comedy',
+            description: 'A drama of light and amusing character and typically with a happy ending.'
+        },
+        director: {
+            name: 'William Dear',
+            bio: 'William Dear was born on November 30, 1944 in Toronto, Ontario, Canada. He is a director and writer, known for Harry and the Hendersons (1987), The Rocketeer (1991) and Timerider: The Adventure of Lyle Swann (1982).',
+            birth: '1944'
+        },
+        imageURL: 'https://m.media-amazon.com/images/M/MV5BZDE1MWU1ZDQtOTg3YS00MTEwLTkxNjItMDQzY2UxMThjYmZkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg',
+        featured: false
+    },
+    {
+        title: 'Field of Dreams',
+        description: 'Iowa farmer Ray Kinsella is inspired by a voice he cant ignore to pursue a dream he can hardly believe. Supported by his wife, Ray begins the quest by turning his ordinary cornfield into a place where dreams can come true.',
+        genre: {
+            name: 'Drama',
+            description: 'A movie or television production with characteristics (such as conflict) of a serious play'
+        },
+        director: {
+            name: 'Phil Alden Robinson',
+            bio: 'Phil Alden Robinson was born on 1 March 1950 in Long Beach, Long Island, New York, USA. He is a writer and director, known for Field of Dreams (1989), Sneakers (1992) and The Sum of All Fears (2002). He has been married to Paulette Bartlett since 26 September 2009.',
+            birth: '1950'
+        },
+        imageURL: 'https://m.media-amazon.com/images/M/MV5BNzk5OWY0YjAtYWU3ZS00Y2Q4LWFlNjItMzgwMTQ2MjIyMDFmL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg',
+        featured: false
+    },
 ];
 
 app.use(morgan('combined', {stream: accessLogStream}));
