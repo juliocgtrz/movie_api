@@ -17,3 +17,10 @@ URL: /favicon.ico
 Timestamp: Thu Sep 07 2023 23:00:12 GMT-0600 (Mountain Daylight Time)
 
 ::1 - - [19/Oct/2023:05:20:27 +0000] "GET /movies HTTP/1.1" 200 555 "-" "PostmanRuntime/7.33.0"
+::1 - - [20/Oct/2023:04:12:57 +0000] "GET /movies HTTP/1.1" 200 3962 "-" "PostmanRuntime/7.33.0"
+::1 - - [20/Oct/2023:04:19:25 +0000] "GET /movies/The%20Sandlot HTTP/1.1" 404 159 "-" "PostmanRuntime/7.33.0"
+::1 - - [20/Oct/2023:04:22:11 +0000] "GET /movies/The%20Sandlot HTTP/1.1" 404 159 "-" "PostmanRuntime/7.33.0"
+::1 - - [20/Oct/2023:04:24:06 +0000] "GET /movies/A%20League%20of%20Their%20Own HTTP/1.1" 404 175 "-" "PostmanRuntime/7.33.0"
+::1 - - [20/Oct/2023:04:25:56 +0000] "GET /movies HTTP/1.1" 200 3962 "-" "PostmanRuntime/7.33.0"
+::1 - - [20/Oct/2023:04:26:10 +0000] "GET /movies/The%20Sandlot HTTP/1.1" 404 159 "-" "PostmanRuntime/7.33.0"
+::1 - - [20/Oct/2023:04:26:18 +0000] "GET /movies/The%20Sandlot HTTP/1.1" 404 159 "-" "PostmanRuntime/7.33.0"
