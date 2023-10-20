@@ -18,9 +18,9 @@ let movies = [
             Description: 'A drama of light and amusing character and typically with a happy ending.'
         },
         Director: {
-        Name: 'David Mickey Evans',
-        Bio: 'David Mickey Evans was born on October 20, 1962 in Wilkes Barre, Pennsylvania, USA. He is a director and writer, known for The Sandlot (1993), Untitled Sandlot Prequel and Radio Flyer (1992).',
-        Birth: '1962'
+            Name: 'David Mickey Evans',
+            Bio: 'David Mickey Evans was born on October 20, 1962 in Wilkes Barre, Pennsylvania, USA. He is a director and writer, known for The Sandlot (1993), Untitled Sandlot Prequel and Radio Flyer (1992).',
+            Birth: '1962'
         },
         ImageURL: 'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6C12E7878CF4642CE13C3DF5E64D6584802F1363ABE86BCBEFCA297B239B2E24/scale?width=1200&aspectRatio=1.78&format=jpeg',
         Featured: false
