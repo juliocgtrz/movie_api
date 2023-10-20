@@ -6,12 +6,11 @@ const express = require('express'),
         uuid = require('uuid');
 
 const app = express();
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
 
 app.use(bodyParser.json());
 app.use(morgan('combined', {stream: accessLogStream}));
 app.use('/documentation.html', express.static('public'));
-
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
 
 app.get('/', (req, res) => {
     res.send('Welcome to My Flix!');
