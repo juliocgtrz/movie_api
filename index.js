@@ -107,14 +107,14 @@ app.get('/movies', (req, res) => {
 })
 
 //Get data about a single movie by title
-app.get('/movies/:Title', (req, res) => {
-    const { Title } = req.params;
-    const movie = movies.find( movie => movie.Title === Title );
+app.get('/movies/:title', (req, res) => {
+    const {title} = req.params;
+    const movie = movies.find( movie => movie.Title === title );
 
     if (movie) {
         res.status(200).json(movie);
     }else{
-        res.status(400).send('no such movie')
+        res.status(400).send('no such movie');
     }
 })
 
