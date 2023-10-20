@@ -1,13 +1,12 @@
-const express = require('express');
-const morgan = require('morgan');
-const fs = require('fs');
-const path = require('path');
-const bodyParser = require('body-parser');
-const uuid = require('uuid');
+const express = require('express'),
+        app = express(),
+        bodyParser = require('body-parser'),
+        uuid = require('uuid');
 
-const app = express();
+app.use(bodyParser.json());
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
+
+// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
 
 let movies = [
     {
@@ -87,22 +86,19 @@ let movies = [
     },
 ];
 
-app.use(morgan('combined', {stream: accessLogStream}));
-app.use('/documentation.html', express.static('public'));
-app.use(bodyParser.json());
+// app.use(morgan('combined', {stream: accessLogStream}));
+// app.use('/documentation.html', express.static('public'));
 
-app.get('/', (req, res) => {
-    res.send('Welcome to My Flix!');
-});
+// app.get('/', (req, res) => {
+//     res.send('Welcome to My Flix!');
+// });
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+// app.use((err, req, res, next) => {
+//     console.error(err.stack);
+//     res.status(500).send('Something broke!');
+// });
 
-app.listen(8080, () => {
-    console.log('Your app is listening on port 8080.');
-});
+
 
 //Get a list of all movies
 app.get('/movies', (req, res) => {
@@ -168,3 +164,8 @@ app.post('/users', (req, res) => {
 
 
 //Delete user registration
+
+
+app.listen(8080, () => {
+    console.log('Your app is listening on port 8080.');
+});
