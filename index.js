@@ -1,12 +1,27 @@
 const express = require('express'),
-        app = express(),
+        morgan = require('morgan'),
+        fs = require('fs'),
+        path = require('path'),
         bodyParser = require('body-parser'),
         uuid = require('uuid');
 
+const app = express();
+
 app.use(bodyParser.json());
+app.use(morgan('combined', {stream: accessLogStream}));
+app.use('/documentation.html', express.static('public'));
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
+
+app.get('/', (req, res) => {
+    res.send('Welcome to My Flix!');
+});
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 
 
-// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
 
 let movies = [
     {
@@ -85,20 +100,6 @@ let movies = [
         Featured: false
     },
 ];
-
-// app.use(morgan('combined', {stream: accessLogStream}));
-// app.use('/documentation.html', express.static('public'));
-
-// app.get('/', (req, res) => {
-//     res.send('Welcome to My Flix!');
-// });
-
-// app.use((err, req, res, next) => {
-//     console.error(err.stack);
-//     res.status(500).send('Something broke!');
-// });
-
-
 
 //Get a list of all movies
 app.get('/movies', (req, res) => {
