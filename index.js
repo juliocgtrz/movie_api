@@ -4,6 +4,11 @@ const express = require('express'),
         path = require('path'),
         bodyParser = require('body-parser'),
         uuid = require('uuid');
+        mongoose = require('mongoose');
+        Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
 
 const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
