@@ -53,7 +53,7 @@ app.get('/users', async (req, res) => {
 });
 
 //Get a user by username
-app.get('/users/:Usernam', async (req, res) => {
+app.get('/users/:Username', async (req, res) => {
     await Users.findOne({ Username: req.params.Username })
         .then((user) => {
             res.json(user);
@@ -76,9 +76,9 @@ app.get('/movies/:Title', async (req, res) => {
         });
 });
 
-//Get genre info when by specific genre
+//Get genre info by specific genre
 app.get('/movies/genre/:Name', async (req, res) => {
-    await Movies.findOne({ 'Genre.Name': req.params.genreName })
+    await Movies.findOne({ Name: req.params.Name })
         .then((movie) => {
             res.status(200).json(movie.Genre);
         })
