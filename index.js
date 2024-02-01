@@ -4,8 +4,8 @@ const express = require('express'),
         path = require('path'),
         bodyParser = require('body-parser'),
         uuid = require('uuid');
-        mongoose = require('mongoose');
-        Models = require('./models.js');
+        mongoose = require('mongoose'); //Mongoose for interacting with MongoDB
+        Models = require('./models.js'); //Import custom data models
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -64,7 +64,7 @@ app.get('/users/:Usernam', async (req, res) => {
         });
 });
 
-//Get JSON movie info when looking for a specific title
+//Get movie data by specific title
 app.get('/movies/:Title', async (req, res) => {
     await Movies.findOne({ Title: req.params.Title })
         .then((movie) => {
@@ -76,11 +76,11 @@ app.get('/movies/:Title', async (req, res) => {
         });
 });
 
-//Get JSON genre info when looking for specific genre
-app.get('/genre/:Name', async (req, res) => {
-    await Genres.findOne({ Name: req.params.Name })
-        .then((genre) => {
-            res.json(genre.Description);
+//Get genre info when by specific genre
+app.get('/movies/genre/:Name', async (req, res) => {
+    await Movies.findOne({ 'Genre.Name': req.params.genreName })
+        .then((movie) => {
+            res.status(200).json(movie.Genre);
         })
         .catch((err) => {
             console.error(err);
