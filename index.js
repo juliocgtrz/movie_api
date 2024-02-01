@@ -149,9 +149,8 @@ app.put('/users/:Username', async (req, res) => {
 
 //Add a movie to user's list of favorites
 app.post('/users/:Username/movies/:MovieID', async (req, res) => {
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $push: { FavoriteMovies: req.params.MovieID }
-    },
+    await Users.findOneAndUpdate({ Username: req.params.Username },
+    { $push: { FavoriteMovies: req.params.MovieID } },
     { new: true }) //This line makes sure that the updated document is returned
     .then((updatedUser) => {
         res.json(updatedUser);
