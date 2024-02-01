@@ -136,17 +136,28 @@ app.get("/movies", (req, res) => {
         });
 });
 
-//Get data about a single movie by title
-app.get('/movies/:title', (req, res) => {
-    const { title } = req.params;
-    const movie = movies.find( movie => movie.Title === title );
+app.get("/users", function (req, res) {
+    Users.find()
+        .then(function (users) {
+            res.status(201).json(users);
+        })
+        .catch(function (err) {
+            console.error(err);
+            res.status(500).send("Error: " + err);
+        });
+});
 
-    if (movie) {
-        res.status(200).json(movie);
-    } else {
-        res.status(400).send('no such movie');
-    }
-})
+//Get JSON movie info when looking for a specific title
+app.get("/movies/:Title", (req, res) => {
+    Movies.findOne({ Title: req.params.Title})
+        .then((movie) => {
+            res.json(movie);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send("Error: " + err);
+        });
+});
 
 //Get data about a genre by genre's name
 app.get('/movies/genre/:genreName', (req, res) => {
