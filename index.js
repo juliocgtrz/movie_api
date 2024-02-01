@@ -89,10 +89,10 @@ app.get('/movies/genre/:genreName', async (req, res) => {
 });
 
 //Get info on a director when looking for a specific director
-app.get('director/:Name', async (req, res) => {
-    await Directors.findOne({ Name: req.params.Name })
-        .then((director) => {
-            res.json(director);
+app.get('/movies/director/:directorName', async (req, res) => {
+    await Movies.findOne({ 'Director.Name': req.params.directorName })
+        .then((movie) => {
+            res.status(200).json(movie.Director);
         })
         .catch((err) => {
             console.error(err);
