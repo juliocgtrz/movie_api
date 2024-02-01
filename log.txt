@@ -75,3 +75,4 @@ Timestamp: Thu Sep 07 2023 23:00:12 GMT-0600 (Mountain Daylight Time)
 ::1 - - [01/Feb/2024:06:29:56 +0000] "POST /users/CalRipken/655d8fbfb7223080f319898d HTTP/1.1" 404 180 "-" "PostmanRuntime/7.33.0"
 ::1 - - [01/Feb/2024:06:30:36 +0000] "POST /users/CalRipken/movies/655d8fbfb7223080f319898d HTTP/1.1" 200 205 "-" "PostmanRuntime/7.33.0"
 ::1 - - [01/Feb/2024:06:32:05 +0000] "DELETE /users/CalRipken/movies/655d8fbfb7223080f319898d HTTP/1.1" 200 179 "-" "PostmanRuntime/7.33.0"
+::1 - - [01/Feb/2024:06:39:26 +0000] "DELETE /users/CalRipken HTTP/1.1" 200 22 "-" "PostmanRuntime/7.33.0"
