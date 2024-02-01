@@ -56,3 +56,4 @@ Timestamp: Thu Sep 07 2023 23:00:12 GMT-0600 (Mountain Daylight Time)
 ::1 - - [01/Feb/2024:05:51:24 +0000] "GET /movies/genre/Comedy HTTP/1.1" 500 66 "-" "PostmanRuntime/7.33.0"
 ::1 - - [01/Feb/2024:05:51:36 +0000] "GET /movies/The%20Sandlot HTTP/1.1" 200 908 "-" "PostmanRuntime/7.33.0"
 ::1 - - [01/Feb/2024:06:04:02 +0000] "GET /movies/genre/Comedy HTTP/1.1" 500 66 "-" "PostmanRuntime/7.33.0"
+::1 - - [01/Feb/2024:06:08:27 +0000] "GET /movies/genre/Drama HTTP/1.1" 200 124 "-" "PostmanRuntime/7.33.0"
