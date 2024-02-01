@@ -70,3 +70,8 @@ Timestamp: Thu Sep 07 2023 23:00:12 GMT-0600 (Mountain Daylight Time)
 ::1 - - [01/Feb/2024:06:24:34 +0000] "POST /users/CalRipken/The%20Sandlot HTTP/1.1" 404 169 "-" "PostmanRuntime/7.33.0"
 ::1 - - [01/Feb/2024:06:25:25 +0000] "POST /users/CalRipken/movies/The%20Sandlot HTTP/1.1" 500 127 "-" "PostmanRuntime/7.33.0"
 ::1 - - [01/Feb/2024:06:25:42 +0000] "POST /users/CalRipken/movie/The%20Sandlot HTTP/1.1" 404 175 "-" "PostmanRuntime/7.33.0"
+::1 - - [01/Feb/2024:06:29:23 +0000] "POST /users/CalRipken/The%20Sandlot HTTP/1.1" 404 169 "-" "PostmanRuntime/7.33.0"
+::1 - - [01/Feb/2024:06:29:30 +0000] "GET /movies HTTP/1.1" 201 8339 "-" "PostmanRuntime/7.33.0"
+::1 - - [01/Feb/2024:06:29:56 +0000] "POST /users/CalRipken/655d8fbfb7223080f319898d HTTP/1.1" 404 180 "-" "PostmanRuntime/7.33.0"
+::1 - - [01/Feb/2024:06:30:36 +0000] "POST /users/CalRipken/movies/655d8fbfb7223080f319898d HTTP/1.1" 200 205 "-" "PostmanRuntime/7.33.0"
+::1 - - [01/Feb/2024:06:32:05 +0000] "DELETE /users/CalRipken/movies/655d8fbfb7223080f319898d HTTP/1.1" 200 179 "-" "PostmanRuntime/7.33.0"
