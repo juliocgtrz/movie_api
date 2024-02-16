@@ -16,6 +16,10 @@ const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+let auth = require('./auth.js')(app);
+const passport = require('passport');
+require('./passport.js');
 app.use(morgan('combined', {stream: accessLogStream}));
 app.use('/documentation.html', express.static('public'));
 
