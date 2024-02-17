@@ -186,7 +186,12 @@ app.delete('/users/:Username/movies/:MovieID', async (req, res) => {
 });
 
 //Delete a user by username
-app.delete('/users/:Username', async (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    //Condition to check username in the request body matches the one in the request parameter
+    if(req.user.Username !== req.params.Username){
+        return res.status(400).send('Permission denied');
+    }
+    //Condition ends
     await Users.findOneAndDelete({ Username: req.params.Username })
         .then((user) => {
             if (!user) {
