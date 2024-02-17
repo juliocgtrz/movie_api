@@ -77,3 +77,7 @@ Timestamp: Thu Sep 07 2023 23:00:12 GMT-0600 (Mountain Daylight Time)
 ::1 - - [01/Feb/2024:06:32:05 +0000] "DELETE /users/CalRipken/movies/655d8fbfb7223080f319898d HTTP/1.1" 200 179 "-" "PostmanRuntime/7.33.0"
 ::1 - - [01/Feb/2024:06:39:26 +0000] "DELETE /users/CalRipken HTTP/1.1" 200 22 "-" "PostmanRuntime/7.33.0"
 ::1 - - [17/Feb/2024:04:56:41 +0000] "GET /movies HTTP/1.1" 201 8339 "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:05:01:18 +0000] "GET /movies HTTP/1.1" 401 - "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:05:02:55 +0000] "POST /users HTTP/1.1" 201 187 "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:05:06:12 +0000] "POST /users?Username=thegreatpapyrus&Password=spaghetti HTTP/1.1" 500 136 "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:05:11:01 +0000] "GET /movies HTTP/1.1" 201 8339 "-" "PostmanRuntime/7.36.1"
