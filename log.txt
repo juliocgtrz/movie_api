@@ -93,3 +93,8 @@ Timestamp: Thu Sep 07 2023 23:00:12 GMT-0600 (Mountain Daylight Time)
 ::1 - - [17/Feb/2024:06:01:25 +0000] "GET /movies/director/David%20Mickey%20Evans HTTP/1.1" 200 255 "-" "PostmanRuntime/7.36.1"
 ::1 - - [17/Feb/2024:06:02:37 +0000] "POST /users/TestUser1/movies/655d8fbfb7223080f319898d HTTP/1.1" 200 205 "-" "PostmanRuntime/7.36.1"
 ::1 - - [17/Feb/2024:06:03:57 +0000] "DELETE /users/thegreatpapyrus HTTP/1.1" 200 28 "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:06:15:36 +0000] "GET /users HTTP/1.1" 201 804 "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:06:15:53 +0000] "DELETE /users/AshleyCafe HTTP/1.1" 400 17 "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:06:18:35 +0000] "DELETE /users/TestUser1/movies/655d8fbfb7223080f319898d HTTP/1.1" 401 - "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:06:18:41 +0000] "DELETE /users/TestUser1/movies/655d8fbfb7223080f319898d HTTP/1.1" 200 179 "-" "PostmanRuntime/7.36.1"
+::1 - - [17/Feb/2024:06:19:49 +0000] "DELETE /users/TestUser1 HTTP/1.1" 200 22 "-" "PostmanRuntime/7.36.1"
