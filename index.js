@@ -3,9 +3,10 @@ const express = require('express'),
         fs = require('fs'),
         path = require('path'),
         bodyParser = require('body-parser'),
-        uuid = require('uuid');
-        mongoose = require('mongoose'); //Mongoose for interacting with MongoDB
-        Models = require('./models.js'); //Import custom data models
+        uuid = require('uuid'),
+        mongoose = require('mongoose'), //Mongoose for interacting with MongoDB
+        Models = require('./models.js'), //Import custom data models
+        {check, validationResult} = require('express-validator'); //Import express-validator library
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -118,7 +119,25 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
 });
 
 //Add a new user
-app.post('/users', async (req, res) => {
+app.post('/users', 
+    //Validation logic here for request
+    //you can either use a chain of methods like .not().isEmpty()
+    //which means "opposite of isEmpty" in plain english "is not empty"
+    //or use .isLength({min: 5}) which means minimum value of 5 characters are only allowed
+    [
+        check('Username', 'Username is required').isLength({min: 5}),
+        check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
+        check('Password', 'Password is required').not().isEmpty(),
+        check('Email', 'Email does not appear to be valid').isEmail()
+    ], async (req, res) => {
+
+    //check the validation object for errors
+        let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
     let hashedPassword = Users.hashPassword(req.body.Password);
     await Users.findOne({ Username: req.body.Username }) //Search to see if a user with the requested username already exists
         .then((user) => {
@@ -134,10 +153,10 @@ app.post('/users', async (req, res) => {
                         Birthday: req.body.Birthday,
                     })
                     .then((user) => { res.status(201).json(user) })
-                .catch((error) => {
-                    console.error(error);
-                    res.status(500).send('Error: ' + error);
-                })
+                    .catch((error) => {
+                        console.error(error);
+                        res.status(500).send('Error: ' + error);
+                    });
             }
         })
         .catch((error) => {
