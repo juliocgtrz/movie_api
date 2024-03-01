@@ -167,7 +167,13 @@ app.post('/users',
 });
 
 //Update a user's info by username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put('/users/:Username', 
+    [
+        check('Username', 'Username is required').notEmpty(),
+        check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
+        check('Password', 'Password is required').notEmpty(),
+        check('Email', 'Email does not appear to be valid').isEmail()
+    ], passport.authenticate('jwt', { session: false }), async (req, res) => {
     //Condition to check username in the request body matches the one in the request parameter
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
