@@ -174,6 +174,13 @@ app.put('/users/:Username',
         check('Password', 'Password is required').notEmpty(),
         check('Email', 'Email does not appear to be valid').isEmail()
     ], passport.authenticate('jwt', { session: false }), async (req, res) => {
+
+        //check the validation object for errors
+        let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
     //Condition to check username in the request body matches the one in the request parameter
     if(req.user.Username !== req.params.Username){
         return res.status(400).send('Permission denied');
