@@ -126,7 +126,7 @@ app.post('/users',
     //which means "opposite of isEmpty" in plain english "is not empty"
     //or use .isLength({min: 5}) which means minimum value of 5 characters are only allowed
     [
-        check('Username', 'Username is required').isLength({min: 5}),
+        check('Username', 'Username must be a minimum of 5 characters').isLength({min: 5}),
         check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
         check('Password', 'Password is required').not().isEmpty(),
         check('Email', 'Email does not appear to be valid').isEmail()
@@ -144,7 +144,7 @@ app.post('/users',
         .then((user) => {
             if (user) {
             //If the user is found, send a response that it already exists    
-                return res.status(400).send(req.body.Username + 'already exists');
+                return res.status(400).send(req.body.Username + ' already exists');
             } else {
                 Users
                     .create({
