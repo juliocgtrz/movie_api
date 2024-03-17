@@ -17,7 +17,7 @@ mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifie
 const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags:'a'});
 const cors = require('cors'); //Code to use CORS within myFlix
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'http://localhost:1234/'];
 
 app.use(cors({
     origin: (origin, callback) => {
