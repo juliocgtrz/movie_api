@@ -29,7 +29,7 @@ app.use(cors({
         return callback(null, true);
     }
 }));
-
+app.options('*', cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 let auth = require('./auth.js')(app);
