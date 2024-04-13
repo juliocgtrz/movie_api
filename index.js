@@ -71,9 +71,9 @@ app.get('/users', async (req, res) => {
         });
 });
 
-//Get a user by username
-app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Users.findOne({ Username: req.params.Username })
+//Get a user by email
+app.get('/users/:Email', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await Users.findOne({ Email: req.params.Email })
         .then((user) => {
             res.json(user);
         })
@@ -126,8 +126,8 @@ app.post('/users',
     //which means "opposite of isEmpty" in plain english "is not empty"
     //or use .isLength({min: 5}) which means minimum value of 5 characters are only allowed
     [
-        check('Username', 'Username must be a minimum of 5 characters').isLength({min: 5}),
-        check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
+        // check('Username', 'Username must be a minimum of 5 characters').isLength({min: 5}),
+        // check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
         check('Password', 'Password is required').not().isEmpty(),
         check('Email', 'Email does not appear to be valid').isEmail()
     ], async (req, res) => {
@@ -140,15 +140,17 @@ app.post('/users',
         }
 
     let hashedPassword = Users.hashPassword(req.body.Password);
-    await Users.findOne({ Username: req.body.Username }) //Search to see if a user with the requested username already exists
+    await Users.findOne({ Email: req.body.Email }) //Search to see if a user with the requested email already exists
         .then((user) => {
             if (user) {
             //If the user is found, send a response that it already exists    
-                return res.status(400).send(req.body.Username + ' already exists');
+                return res.status(400).send(req.body.Email + ' already exists');
             } else {
                 Users
                     .create({
-                        Username: req.body.Username,
+                        // Username: req.body.Username,
+                        Firstname: req.body.Firstname,
+                        Lastname: req.body.Lastname,
                         Password: hashedPassword,
                         Email: req.body.Email,
                         Birthday: req.body.Birthday,
@@ -169,8 +171,8 @@ app.post('/users',
 //Update a user's info by username
 app.put('/users/:Username', 
     [
-        check('Username', 'Username is required').notEmpty(),
-        check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
+        // check('Username', 'Username is required').notEmpty(),
+        // check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
         check('Password', 'Password is required').notEmpty(),
         check('Email', 'Email does not appear to be valid').isEmail()
     ], passport.authenticate('jwt', { session: false }), async (req, res) => {
@@ -181,14 +183,16 @@ app.put('/users/:Username',
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-    //Condition to check username in the request body matches the one in the request parameter
-    if(req.user.Username !== req.params.Username){
+    //Condition to check email in the request body matches the one in the request parameter
+    if(req.user.Email !== req.params.Email){
         return res.status(400).send('Permission denied');
     }
     //Condition ends
-    await Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+    await Users.findOneAndUpdate({ Email: req.params.Email }, { $set:
         {
-            Username: req.body.Username,
+            // Username: req.body.Username,
+            Firstname: req.body.Firstname,
+            Lastname: req.body.Lastname,
             Password: req.body.Password,
             Email: req.body.Email,
             Birthday: req.body.Birthday,
@@ -205,8 +209,8 @@ app.put('/users/:Username',
 });
 
 //Add a movie to user's list of favorites
-app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Users.findOneAndUpdate({ Username: req.params.Username },
+app.post('/users/:Email/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await Users.findOneAndUpdate({ Email: req.params.Email },
     { $push: { FavoriteMovies: req.params.MovieID } },
     { new: true }) //This line makes sure that the updated document is returned
     .then((updatedUser) => {
@@ -219,8 +223,8 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 });
 
 //Remove a movie from a user's list of favorites
-app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
+app.delete('/users/:Email/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    await Users.findOneAndUpdate({ Email: req.params.Email }, {
         $pull: { FavoriteMovies: req.params.MovieID }
     },
     { new: true }) //This line makes sure that the updated document is returned
@@ -234,18 +238,18 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
 });
 
 //Delete a user by username
-app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.delete('/users/:Email', passport.authenticate('jwt', { session: false }), async (req, res) => {
     //Condition to check username in the request body matches the one in the request parameter
-    if(req.user.Username !== req.params.Username){
+    if(req.user.Email !== req.params.Email){
         return res.status(400).send('Permission denied');
     }
     //Condition ends
-    await Users.findOneAndDelete({ Username: req.params.Username })
+    await Users.findOneAndDelete({ Email: req.params.Email })
         .then((user) => {
             if (!user) {
-                res.status(400).send(req.params.Username + ' was not found');
+                res.status(400).send(req.params.Email + ' was not found');
             } else {
-                res.status(200).send(req.params.Username + ' was deleted.');
+                res.status(200).send(req.params.Email + ' was deleted.');
             }
         })
         .catch((err) => {
