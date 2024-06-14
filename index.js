@@ -47,7 +47,18 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-//Get all movies
+/**
+ * Handle GET requests to access all movies
+ * 
+ * @function
+ * @name getAllMovies
+ * @param {Object} req - Express request object
+ * @param {Object} res - Exrpess response object
+ * @returns {Promise<void>} - A Promise that resolves when the movie request process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @returns {Object} [] allMovies - The array of all movies in the database
+ * 
+ */
 app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.find()
         .then((movies) => {
@@ -59,7 +70,18 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), async (req,
         });
 });
 
-//Get all users
+/**
+ * Handle GET requests to access all users
+ * 
+ * @function
+ * @name getAllUsers
+ * @param {Object} req - Express request object
+ * @param {Object} res - Exrpess response object
+ * @returns {Promise<void>} - A Promise that resolves when the user request process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @returns {Object} [] allUsers - The array of all users in the database
+ * 
+ */
 app.get('/users', async (req, res) => {
     await Users.find()
         .then((users) => {
@@ -71,7 +93,18 @@ app.get('/users', async (req, res) => {
         });
 });
 
-//Get a user by username
+/**
+ * Handle GET requests to access for a specific user
+ *
+ * @function
+ * @name getUser
+ * @param {Object} req - Express request object with parameter: Username
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the user request process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @returns {Object} reqUser - The object containing the data for the requested movie
+ * 
+ */
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOne({ Username: req.params.Username })
         .then((user) => {
@@ -83,7 +116,18 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), as
         });
 });
 
-//Get movie data by specific title
+/**
+ * Handle GET requests to access for a specific movie
+ *
+ * @function
+ * @name getMovie
+ * @param {Object} req - Express request object with parameter: Title (movie title)
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the movie request process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @returns {Object} reqMovie - The object containing the data for the requested movie
+ * 
+ */
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.findOne({ Title: req.params.Title })
         .then((movie) => {
@@ -95,7 +139,18 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), asyn
         });
 });
 
-//Get genre info by specific genre
+/**
+ * Handle GET requests to access for a specific genre
+ *
+ * @function
+ * @name getGenre
+ * @param {Object} req - Express request object with parameter: genreName (genre name)
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the genre request process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @returns {Object} reqGenre - The object containing the data for the requested genre
+ * 
+ */
 app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.findOne({ 'Genre.Name': req.params.genreName })
         .then((movie) => {
@@ -107,7 +162,18 @@ app.get('/movies/genre/:genreName', passport.authenticate('jwt', { session: fals
         });
 });
 
-//Get info on a director when looking for a specific director
+/**
+ * Handle GET requests to access for a specific director
+ *
+ * @function
+ * @name getDirector
+ * @param {Object} req - Express request object with parameter: directorName (director name)
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the director request process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @returns {Object} reqDirector - The object containing the data for the requested director
+ * 
+ */
 app.get('/movies/director/:directorName', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Movies.findOne({ 'Director.Name': req.params.directorName })
         .then((movie) => {
@@ -119,7 +185,18 @@ app.get('/movies/director/:directorName', passport.authenticate('jwt', { session
         });
 });
 
-//Add a new user
+/**
+ * Handle POST requests to add a new user
+ *
+ * @function
+ * @name addUser
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the user creation process is complete
+ * @throws {Error} - If there is an unexpected error during the user creation process
+ * @returns {Object} newUser - The newly created user object. Sent in the response on success
+ * 
+ */
 app.post('/users', 
     //Validation logic here for request
     //you can either use a chain of methods like .not().isEmpty()
@@ -166,7 +243,20 @@ app.post('/users',
         });
 });
 
-//Update a user's info by username
+/**
+ * Handle PUT requests to update user information
+ *
+ * @function
+ * @name updateUser
+ * @param {Object} req - Express request object with parameters: Username
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the user update process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @fires {Object} updatedUser - The updated user object sent in the response on success
+ * @description
+ *   Expects at least one updatable field (username, password, email, birthday) in the request body
+ * 
+ */
 app.put('/users/:Username', 
     [
         check('Username', 'Username is required').notEmpty(),
@@ -204,7 +294,18 @@ app.put('/users/:Username',
     })
 });
 
-//Add a movie to user's list of favorites
+/**
+ * Handle POST requests to add a movie to a user's favorites
+ *
+ * @function
+ * @name addFavoriteMovie
+ * @param {Object} req - Express request object with parameters: Username, MovieId (movie ID)
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the movie addition process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @returns {Object} updatedUser - The updated user object (including the added movie) sent in the response on success
+ * 
+ */
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOneAndUpdate({ Username: req.params.Username },
     { $push: { FavoriteMovies: req.params.MovieID } },
@@ -218,7 +319,18 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
     });
 });
 
-//Remove a movie from a user's list of favorites
+/**
+ * Handle DELETE requests to remove a movie from a user's favorites
+ *
+ * @function
+ * @name removeFavoriteMovie
+ * @param {Object} req - Express request object with parameters: Username, MovieId (movie ID)
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the movie removal process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @fires {Object} updatedUser - The updated user object (after removing the movie) sent in the response on success
+ * 
+ */
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), async (req, res) => {
     await Users.findOneAndUpdate({ Username: req.params.Username }, {
         $pull: { FavoriteMovies: req.params.MovieID }
@@ -233,7 +345,18 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
     });
 });
 
-//Delete a user by username
+/**
+ * Handle DELETE requests to delete a user
+ *
+ * @function
+ * @name deleteUser
+ * @param {Object} req - Express request object with parameters: Username
+ * @param {Object} res - Express response object
+ * @returns {Promise<void>} - A Promise that resolves when the user deletion process is complete
+ * @throws {Error} - If there is an unexpected error during the process or if permission is denied
+ * @fires {string} message - A message indicating the result of the user deletion process
+ * 
+ */
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
     //Condition to check username in the request body matches the one in the request parameter
     if(req.user.Username !== req.params.Username){
